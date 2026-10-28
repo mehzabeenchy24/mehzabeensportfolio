@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/*
+  Palette — starting colours from the brief, refined for contrast on ivory:
+  • teal-ink (#36696A) is the text-safe teal (≥5:1 on ivory); teal (#467F80) is for accents & large type.
+  • muted (#5B6472) keeps secondary text above 5:1.
+*/
+@theme {
+  --color-ivory: #faf9f6;
+  --color-paper: #ffffff;
+  --color-navy: #17263d;
+  --color-charcoal: #303743;
+  --color-muted: #5b6472;
+  --color-teal: #467f80;
+  --color-teal-ink: #36696a;
+  --color-sage: #dde9e4;
+  --color-sage-soft: #eef4f1;
+  --color-line: #e4e0d8;
+  --color-line-strong: #cfcabf;
+
+  --font-serif: var(--font-instrument), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-sage);
+  color: var(--color-navy);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--color-navy);
+  color: var(--color-ivory);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Scroll reveal — content is always visible without JS; hidden state is applied by Reveal.tsx only */
+.reveal {
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* Hairline paper texture for the hero: faint vertical rules, no imagery */
+.hairlines {
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(8.3333% - 1px),
+    rgba(23, 38, 61, 0.05) calc(8.3333% - 1px),
+    rgba(23, 38, 61, 0.05) 8.3333%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal-hidden {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
