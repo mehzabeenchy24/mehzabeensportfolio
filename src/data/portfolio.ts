@@ -1,11 +1,12 @@
 /**
  * ──────────────────────────────────────────────────────────────────────────
- *  PORTFOLIO CONTENT — the single place to edit everything on the site.
+ *  PORTFOLIO CONTENT: the single place to edit everything on the site.
  * ──────────────────────────────────────────────────────────────────────────
- *  • Links left as "" are hidden or shown as "coming soon" automatically.
+ *  • Links left as "" are hidden automatically.
  *  • Project results: add strings to a project's `results` array when you
  *    have real findings. A "Results" block then appears on its card.
  *  • Keep claims accurate. Nothing here should state more than is true.
+ *  • Visible prose avoids em and en dashes by design.
  */
 
 export const site = {
@@ -13,9 +14,9 @@ export const site = {
   shortName: "Mehzabeen",
   location: "Sylhet, Bangladesh",
   email: "reachmehzabeen@gmail.com",
-  title: "Mehzabeen Azad Chowdhury | Healthcare AI & Data Science",
+  title: "Mehzabeen Azad Chowdhury | Applied Healthcare Research",
   description:
-    "Computer Science graduate and MSc Data Science student exploring applied machine learning, medical imaging, and clinical data analysis. Exploring thesis-based research opportunities for Fall 2027.",
+    "Computer Science graduate and MSc Data Science student working on applied machine learning, clinical data analysis, medical imaging, and healthcare technology.",
   /** Set NEXT_PUBLIC_SITE_URL in Vercel to your real domain for correct SEO links. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
 };
@@ -24,11 +25,10 @@ export const links = {
   linkedin: "https://www.linkedin.com/in/mehzabeen-chy",
   /** Professional (product management) portfolio. Verify this address opens before sharing. */
   professional: "https://mehzabeenchy24.github.io/Portfolio-/",
-  /** TODO: paste your GitHub profile URL, e.g. "https://github.com/your-username" */
-  github: "",
+  github: "https://github.com/mehzabeenchy24",
   /**
    * Put your PDF at public/cv/ with exactly this file name (or change the path).
-   * The Download CV buttons switch on automatically once the file exists.
+   * The Download CV buttons appear automatically once the file exists.
    */
   cv: "/cv/Mehzabeen_Azad_Chowdhury_CV.pdf",
 };
@@ -51,19 +51,30 @@ export const nav = [
 ];
 
 export const hero = {
-  label: "Health Informatics · Clinical Informatics · Data Science",
+  label: "Applied Machine Learning · Clinical Informatics · Healthcare Technology",
   headline: {
-    before: "Exploring healthcare through",
-    emphasis: "data, intelligence, and technology.",
+    before: "Connecting computing and healthcare",
+    emphasis: "through research, data, and practical technology.",
   },
-  intro:
-    "I'm Mehzabeen, a Computer Science graduate and MSc Data Science student drawn to health and clinical informatics. I like working where doctors, labs, and software meet: understanding what clinical teams actually need and helping turn it into data, tools, and workflows that hold up in practice. I'm not an expert yet, and I learn fastest by building.",
-  availability: "Exploring thesis-based research opportunities for Fall 2027.",
+  intro: [
+    "I am a Computer Science graduate and MSc Data Science student with a professional background in SaaS product management and software quality assurance. My interests lie in applied machine learning, clinical data analysis, medical imaging, and healthcare technology.",
+    "Before entering healthcare research, I worked on software products that required careful requirements definition, collaboration with engineering teams, and systematic testing. I now bring that practical experience into research projects involving medical data, model evaluation, and interdisciplinary collaboration.",
+  ],
+  descriptor: "Computer Science · Data Science · Applied Healthcare Research",
   glance: [
-    { label: "Currently", value: "MSc Data Science, SUST" },
-    { label: "Background", value: "BSc in Computer Science & Engineering; almost 3 years in SaaS product work" },
-    { label: "Working on", value: "Dental imaging dataset, ovarian cancer biomarkers, breast cancer classification" },
-    { label: "Strength", value: "Bridging clinical, lab, and technical teams" },
+    { label: "Currently", value: "MSc in Data Science, Shahjalal University of Science and Technology" },
+    {
+      label: "Background",
+      value: "BSc in Computer Science and Engineering; nearly three years in SaaS product work and software QA",
+    },
+    {
+      label: "Working on",
+      value: "Dental imaging dataset research, breast cancer classification, and planned ovarian cancer biomarker research",
+    },
+    {
+      label: "Strength",
+      value: "Connecting practical software development with careful data work and interdisciplinary collaboration",
+    },
     { label: "Based in", value: site.location },
   ],
 };
@@ -71,22 +82,23 @@ export const hero = {
 export const about = {
   heading: "Bridging the lab, the clinic, and the software.",
   paragraphs: [
-    "What pulls me toward health and clinical informatics is the space between people. A lot goes wrong at the handoffs: what a doctor needs is not always what gets specified, and what a lab records is not always what software can use. I enjoy working in that gap, talking with clinicians and lab teams, understanding how they work, and translating between them and the people building the technology.",
-    "That instinct comes from my work before research. After a BSc in Computer Science and Engineering, I spent almost three years on SaaS products: at Agency Handy, doing a lot of logic building to define how features should behave; at Technext, combining junior product work with software quality assurance; and at Appifylab, in product coordination while leading technical support teams. Those years gave me practice in clear requirements, careful testing, and communicating across disciplines.",
-    "Now, in my MSc in Data Science, I am applying that in health research: reviewing and checking a dental imaging dataset alongside clinical experts, planning thesis work on ovarian cancer biomarkers, and building a breast cancer classification project. I work in Python and Google Colab, but I am not looking to be a heavy machine learning specialist. I would rather use established methods carefully and make them useful to clinical teams. I am not an expert in any of this yet. I am willing to learn, and I am keen to put my hands on real clinical data.",
+    "My interest in healthcare technology grew from a practical question: how can computing help address problems that clinicians and patients encounter in real settings?",
+    "I began my professional career in SaaS product development, working across product management, quality assurance, coordination, and technical support. My responsibilities involved understanding user needs, defining feature behavior, working with developers and designers, documenting issues, and checking whether software performed as intended. These experiences taught me to approach problems systematically and to consider how technology is actually used.",
+    "I am now extending that foundation through an MSc in Data Science and healthcare-focused research projects. In a collaborative dental imaging dataset study, I contribute to image and annotation review, consistency checks, and technical validation. I am also part of a three-person breast cancer classification project exploring model evaluation and understandable predictions. My accepted thesis proposal concerns ovarian cancer diagnosis using blood-based biomarkers.",
+    "I am interested in work that combines clinical questions with sound computational methods, careful evaluation, and useful software. I value collaboration with people who bring different expertise, particularly clinicians, researchers, and engineers.",
   ],
   positioning:
-    "A computer scientist and former product manager building toward health and clinical informatics: collaborative, curious, and learning by doing.",
+    "My approach to research begins with understanding the problem, checking the data, and making the technical work useful to the people it is meant to support.",
   education: [
     {
       degree: "MSc in Data Science",
       institution: "Shahjalal University of Science and Technology (SUST)",
-      detail: "2026 – present",
+      detail: "2026 to present",
     },
     {
       degree: "BSc in Computer Science and Engineering",
       institution: "Leading University, Bangladesh",
-      detail: "2020 – 2024 · CGPA 3.44 / 4.00",
+      detail: "2020 to 2024 · CGPA 3.44 / 4.00",
     },
   ],
 };
@@ -102,7 +114,7 @@ export type ProjectLink = {
 export type ProjectDocument = {
   label: string;
   /**
-   * Path inside /public, e.g. "/docs/dental-dataset-proposal.pdf".
+   * Path inside /public, e.g. "/docs/breast-cancer-proposal.pdf".
    * The button appears automatically once that file exists.
    */
   href: string;
@@ -115,24 +127,35 @@ export type Project = {
   title: string;
   status: string;
   statusKind: ProjectStatusKind;
-  overview: string;
+  /** One or more paragraphs. */
+  overview: string[];
   role: string;
   affiliation?: string;
-  supervisor?: { label: string; name: string };
+  supervisor?: {
+    label: string;
+    name: string;
+    href?: string;
+    /** Small caption shown next to the name, e.g. "Professional profile". */
+    hrefNote?: string;
+  };
   dataset?: string;
-  focus: string[];
-  focusLabel: string;
   tools: string[];
   contributions?: string[];
+  /** Extra labelled lists (for example research questions or proposed methodology). */
+  sections?: { title: string; items: string[] }[];
   notes?: string[];
   /** Add real findings here when you have them. Shown under "Results". */
   results?: string[];
   links: ProjectLink[];
-  /** Extra detail blocks (for example research questions or study design) drawn from the project proposal. */
-  sections?: { title: string; items: string[] }[];
   /** Proposal and other documents. Each shows only when its PDF is present in /public. */
   documents?: ProjectDocument[];
   disclaimer?: string;
+};
+
+export const researchSection = {
+  heading: "Research and Selected Projects",
+  intro:
+    "My current work brings together collaborative medical imaging dataset research, applied machine learning, and clinical prediction. Each project is presented with its actual contribution and current stage of development.",
 };
 
 export const projects: Project[] = [
@@ -143,43 +166,27 @@ export const projects: Project[] = [
     title: "A Multimodal Dental Dataset for Predictive and Assistive Dentistry AI Models",
     status: "Manuscript in preparation",
     statusKind: "manuscript",
-    overview:
-      "A collaborative medical imaging research project developing and documenting a dental radiographic dataset intended to support AI-assisted dentistry. The work integrates periapical and panoramic dental X-ray images with a detailed clinical annotation framework covering anatomical structures, pathological findings, and clinical status.",
-    role: "Co-author / Research Collaborator",
+    overview: [
+      "This collaborative research project is developing and documenting a dental radiographic dataset for future AI-assisted dentistry research. It brings together periapical and panoramic radiographs with structured clinical annotations covering anatomical structures, dental pathologies, and clinical status.",
+      "The manuscript draft describes 849 periapical radiographs and 301 panoramic radiographs, with a 21-class annotation framework. These counts reflect the current draft and may be updated after final validation.",
+    ],
+    role: "Co-author and research collaborator",
     affiliation: "Interdisciplinary Computer Science (InteX) Research Lab",
-    supervisor: { label: "Supervisor", name: "Md. Saidur Rahman Kohinoor" },
-    focusLabel: "Dataset focus",
-    focus: [
-      "21-class clinical annotation framework",
-      "CVAT annotation workflows",
-      "Dataset organization and quality assurance",
-      "Annotation consistency checks",
-      "Collaboration with clinical experts",
-      "Preparation for downstream AI-assisted dental research",
-    ],
-    tools: ["Medical Imaging", "Dental AI", "CVAT", "Google Colab", "Dataset Curation", "Annotation QA", "Research Collaboration"],
+    supervisor: {
+      label: "Supervisor",
+      name: "Md. Saidur Rahman Kohinoor",
+      href: "https://www.linkedin.com/in/srkohinoor/",
+      hrefNote: "Professional profile",
+    },
+    tools: ["CVAT", "Python", "Google Colab", "Annotation review", "Dataset validation", "Research documentation"],
     contributions: [
-      "Dataset review",
-      "Image–annotation consistency checks",
-      "Technical checks in Google Colab",
-      "Research collaboration",
-      "Manuscript-related work",
+      "Reviewing radiographic images and associated annotation records.",
+      "Checking image and annotation correspondence and identifying missing or unmatched entries.",
+      "Supporting dataset consistency checks and technical verification using Python and Google Colab.",
+      "Contributing to research documentation and manuscript-related work.",
+      "Collaborating with the research team on dataset quality assurance.",
     ],
-    sections: [
-      {
-        title: "Dataset design",
-        items: [
-          "Images from clinical dental practices, with identifying information removed before inclusion",
-          "21 classes in three groups: anatomical foundations, pathological indicators, and clinical status and developmental markers",
-          "Bounding-box annotations made in CVAT and verified by a board-certified dentist",
-          "Structured for object-detection and segmentation workflows such as YOLO and U-Net",
-        ],
-      },
-    ],
-    notes: [
-      "Composition figures are as described in the current manuscript draft.",
-      "No radiographs or research files are shown on this site.",
-    ],
+    notes: ["No radiographs or research files are shown on this site."],
     links: [],
   },
   {
@@ -187,25 +194,20 @@ export const projects: Project[] = [
     index: "02",
     category: "Clinical prediction · Thesis research",
     title: "Ovarian Cancer Diagnosis Using Blood-Based Biomarkers",
-    status: "Thesis proposal accepted · Not yet started",
+    status: "Thesis proposal accepted; research preparation",
     statusKind: "thesis",
-    overview:
-      "A planned MSc thesis on distinguishing benign from malignant ovarian tumours using blood-based biomarkers and established machine learning methods, with an emphasis on clinically meaningful evaluation and interpretable predictions. The proposal has been accepted by my supervisor as my final MSc thesis; the research itself has not started.",
-    role: "MSc thesis researcher",
-    supervisor: { label: "Supervisor", name: "Dr. Nahid Sultana" },
-    focusLabel: "Research direction & planned methodology",
-    focus: [
-      "Literature review",
-      "Assessment of dataset suitability",
-      "CA125, HE4, and routine laboratory measures",
-      "Data preprocessing",
-      "Comparison of established classification methods",
-      "Model calibration",
-      "Clinical utility and interpretability",
-      "Reproducible evaluation",
+    overview: [
+      "This planned thesis examines whether established machine learning methods can help distinguish benign from malignant ovarian masses using blood-based biomarkers and relevant clinical information. The proposed variables include CA125, HE4, and selected routine laboratory measurements, depending on dataset suitability.",
+      "The intended work includes literature review, dataset assessment, preprocessing, comparison of classification approaches, and evaluation of discrimination, calibration, interpretability, and clinical relevance.",
+      "The proposal has been accepted, but research implementation has not yet begun. No results are claimed.",
     ],
-    tools: ["Clinical AI", "Biomarkers", "Predictive Modeling", "Python", "Machine Learning", "Clinical Evaluation"],
-    notes: ["The proposal is accepted; work has not begun. No results are claimed. Scope depends on dataset suitability."],
+    role: "MSc thesis researcher",
+    supervisor: {
+      label: "Supervisor",
+      name: "Dr. Nahid Sultana",
+      href: "https://sust.innolytic.net/dept/sta/nahid-sta@sust.edu",
+    },
+    tools: ["Blood-based biomarkers", "Clinical prediction", "Model evaluation", "Interpretability"],
     links: [],
     documents: [{ label: "Thesis proposal (PDF)", href: "/docs/ovarian-biomarkers-proposal.pdf" }],
   },
@@ -214,50 +216,43 @@ export const projects: Project[] = [
     index: "03",
     category: "Applied machine learning · Prototype",
     title: "Interpretable Breast Cancer Classification",
-    status: "Proposal under review · ICPS 2026",
-    statusKind: "review",
-    overview:
-      "A hands-on machine learning project exploring breast cancer classification using numerical features derived from digitized fine-needle aspirate images, with a focus on model evaluation, interpretable predictions, and a lightweight interactive demonstration. A research proposal on this topic has been submitted to ICPS 2026 and is under review.",
-    role: "Three-person team project; currently doing the hands-on work",
-    dataset: "UCI Wisconsin Diagnostic Breast Cancer Dataset",
-    focusLabel: "Technical scope",
-    focus: [
-      "Data preprocessing",
-      "Supervised classification",
-      "Logistic Regression, Decision Trees, and Random Forests where implemented",
-      "Evaluation using appropriate classification metrics",
-      "A small web-based prototype",
+    status: "Development in progress; related research proposal under review",
+    statusKind: "development",
+    overview: [
+      "This applied machine learning project explores classification of benign and malignant breast tumors using numerical measurements derived from digitized fine needle aspirate images. We are investigating how established classification methods compare in performance and interpretability, and how their predictions can be explained clearly to nontechnical users.",
+      "The work explores preprocessing, logistic regression, decision trees, random forests, model evaluation, and interpretable predictions using Python and scikit-learn. An initial web landing page has been developed, while the analysis and explanation workflow is being refined.",
     ],
-    tools: ["Python", "pandas", "NumPy", "scikit-learn", "Interpretable ML", "Classification", "Healthcare AI", "Web Prototype"],
+    role: "Three-person collaborative project",
+    dataset: "UCI Wisconsin Diagnostic Breast Cancer Dataset",
+    tools: ["Python", "pandas", "NumPy", "scikit-learn", "Interpretable ML", "Classification"],
     sections: [
       {
         title: "Research questions",
         items: [
-          "How far can a decision tree's complexity be constrained before sensitivity for malignant cases drops, compared with a Random Forest reference?",
-          "Which nuclear features drive the root and early splits of constrained trees, and how do they compare with Random Forest feature importances?",
-          "Can a shallow tree (depth of 4 or less) stay within a 3% tolerance of Random Forest performance?",
+          "How does decision tree complexity affect performance, especially sensitivity to malignant cases?",
+          "How do interpretable decision trees compare with Random Forest models?",
+          "Which measured features influence model decisions?",
+          "How can prediction explanations and limitations be communicated clearly?",
         ],
       },
       {
-        title: "Proposed study design",
+        title: "Built so far",
+        items: ["An initial web landing page for the project."],
+      },
+      {
+        title: "Proposed methodology, not yet complete",
         items: [
-          "WDBC dataset: 569 samples (357 benign, 212 malignant) with 30 nuclear features",
-          "Stratified 80/20 split with 114 samples held out, and 10-fold stratified cross-validation during development",
-          "Decision trees of varying depth, split and leaf limits, with complexity tracked by node count, leaf count, depth, and average path length",
-          "A tuned Random Forest (100 to 500 trees) as the reference model",
-          "Emphasis on sensitivity and false-negative rate, alongside accuracy, specificity, F1, and ROC-AUC, with McNemar's test and paired t-tests",
-          "An interactive dashboard to trace a prediction through the tree and compare models",
+          "A fixed train and test split with cross-validation during development.",
+          "Decision trees of varying depth compared against a tuned Random Forest reference.",
+          "Evaluation that gives particular weight to sensitivity for malignant cases.",
+          "An interactive way to show how a single prediction is reached.",
         ],
       },
     ],
-    notes: [
-      "Study design as set out in the project proposal. These are planned components, not completed results.",
-      "The proposal is under review for ICPS 2026. It has not been accepted or published.",
-      "The aim is a reproducible applied ML workflow, not a clinical diagnostic service.",
-    ],
-    disclaimer: "Educational research prototype — not intended for clinical use.",
+    notes: ["The related research proposal is under review. It has not been accepted or published."],
+    disclaimer: "Educational research demonstration, not a clinical diagnostic tool.",
     links: [
-      // TODO: paste the repository URL here when it is public.
+      // TODO: paste the repository URL here once it is public and verified.
       { label: "GitHub repository", href: "" },
     ],
     documents: [{ label: "Research proposal (PDF)", href: "/docs/breast-cancer-proposal.pdf" }],
@@ -271,104 +266,131 @@ export const dentalComposition = {
 };
 
 export const experience = {
-  heading: "Experience turning complex problems into usable software.",
-  intro:
-    "Product work taught me to look at technology from the user's side: whether requirements are clear, whether the software behaves reliably, and whether people can fit it into how they already work. I carry that perspective into healthcare technology, alongside the technical work.",
+  heading: "From Software Products to Applied Research",
+  intro: [
+    "Before focusing on healthcare research, I worked with SaaS products across product management, software quality assurance, product coordination, and technical support. I gained practical experience in understanding user requirements, specifying software behavior, coordinating with engineers and designers, testing functionality, and improving products through feedback.",
+    "This background shapes how I approach technical and research problems today. I value clear requirements, careful validation, documentation, and solutions that work for the people who use them.",
+  ],
   roles: [
     {
       company: "Agency Handy",
-      period: "Mar 2025 – Apr 2026",
       role: "Product Manager",
       summary:
-        "Product management on SaaS work, with a lot of hands-on logic building: working out the rules and flows behind how features should behave, and turning them into clear requirements and priorities for the engineering team.",
-      themes: ["Logic building", "Product requirements and documentation", "Workflows and prioritization", "Communication with engineering teams"],
+        "Led product requirements and coordinated SaaS feature delivery across design, engineering, and quality assurance. Worked on onboarding workflows, feature specifications, release documentation, product analytics, and feedback-driven improvements. Translated user and business needs into practical requirements, clarified product behavior, and supported feature validation throughout development.",
+      themes: [
+        "Requirements definition",
+        "Product workflows",
+        "Documentation",
+        "User acceptance testing",
+        "Product analytics",
+        "Cross-functional collaboration",
+      ],
     },
     {
       company: "Technext",
-      period: "May 2024 – Jan 2025",
-      role: "Junior Product Management & Software QA",
+      role: "Junior Product Management and Software QA",
       summary:
-        "A combined product and software quality assurance role: testing software against its requirements and feeding what was found back into iteration.",
-      themes: ["Software quality assurance", "Testing and iterative improvements", "Cross-functional collaboration"],
+        "Contributed to SaaS product development through functional testing, issue identification, release coordination, and communication between product and engineering teams. Evaluated software behavior against requirements, documented problems clearly, and supported iterative product improvements.",
+      themes: [
+        "Software quality assurance",
+        "Feature testing",
+        "Issue tracking",
+        "Product coordination",
+        "Technical communication",
+      ],
     },
     {
       company: "Appifylab",
-      period: "Nov 2023 – Apr 2024",
-      role: "Product Coordination, QA & Technical Support",
+      role: "Product Coordination, QA and Technical Support",
       summary:
-        "Product coordination across teams, with attention to documentation and requirements as features moved through development, alongside leading technical support teams.",
-      themes: ["Leading technical support teams", "Cross-functional collaboration", "User-centered problem-solving", "Product requirements and documentation"],
+        "Supported SaaS product coordination, software testing, technical troubleshooting, and communication of user-reported issues to engineering teams. Helped clarify problems, document findings, and coordinate responses between product, support, and technical functions.",
+      themes: [
+        "Product coordination",
+        "QA",
+        "Technical troubleshooting",
+        "Documentation",
+        "User-centered problem solving",
+      ],
     },
   ],
 };
 
 export const skills = {
-  heading: "Technical tools and research capabilities.",
+  heading: "Technical Skills and Research Capabilities",
   intro:
-    "A mix of tools I work with regularly and areas where I am actively developing proficiency.",
+    "A combination of established software product experience and developing hands-on skills in data analysis, machine learning, and medical research.",
   groups: [
     {
-      title: "Programming & Data Science",
+      title: "Programming and Data",
       note: "Working with",
       items: ["Python", "pandas", "NumPy", "scikit-learn", "Jupyter Notebook", "Google Colab"],
     },
     {
-      title: "Machine Learning & Analysis",
+      title: "Developing Machine Learning Skills",
       note: "Developing proficiency in",
       items: [
         "Data preprocessing",
-        "Exploratory data analysis",
-        "Classification models",
+        "Exploratory analysis",
+        "Supervised classification",
         "Cross-validation",
         "Model evaluation",
         "Interpretable predictions",
       ],
     },
     {
-      title: "Medical Research & Imaging",
+      title: "Medical Data and Research",
       note: "Applied experience",
       items: [
-        "Medical dataset review",
-        "Radiographic image datasets",
+        "Radiographic dataset review",
         "CVAT",
-        "Annotation validation",
+        "XML annotation consistency checks",
+        "Dataset quality assurance",
         "Research documentation",
-        "Clinical data analysis",
       ],
     },
     {
-      title: "Product & Development Tools",
+      title: "Software and Collaboration",
       note: "Applied experience",
-      items: ["Git", "GitHub", "Jira", "Notion", "Figma", "Agile workflows", "Software testing", "Requirements analysis"],
+      items: [
+        "Product requirements",
+        "Functional testing",
+        "Jira",
+        "Trello",
+        "Notion",
+        "Figma",
+        "Git and GitHub (developing)",
+        "PostHog",
+        "Postman",
+        "Cross-functional collaboration",
+      ],
     },
   ],
 };
 
 export const interests = {
   heading: "Research directions I'm exploring.",
-  intro:
-    "I am drawn to problems where careful implementation and a real clinical need meet.",
+  intro: "I am drawn to problems where careful implementation and a real clinical need meet.",
   items: [
     {
-      title: "Medical Imaging & Diagnostic AI",
-      body: "Applying computational methods to clinical images and diagnostic problems.",
+      title: "Medical Imaging and Diagnostic AI",
+      body: "Exploring medical image data, annotation quality, and computational approaches to clinically relevant imaging problems.",
     },
     {
-      title: "Clinical Prediction & Healthcare Analytics",
-      body: "Using clinical and laboratory data to develop and evaluate predictive models.",
+      title: "Clinical Prediction and Healthcare Analytics",
+      body: "Using clinical and laboratory data to develop and evaluate predictive models with attention to clinical relevance.",
     },
     {
-      title: "Explainable & Trustworthy AI",
-      body: "Understanding model predictions, limitations, reliability, and clinical usefulness.",
+      title: "Explainable and Trustworthy AI",
+      body: "Understanding model behavior, limitations, interpretability, and reliability in healthcare applications.",
     },
     {
       title: "Human-Centered Digital Health",
-      body: "Building healthcare technologies that are usable, practical, and aligned with real clinical workflows.",
+      body: "Developing practical healthcare technology that reflects the needs of clinicians, patients, and real workflows.",
     },
   ],
 };
 
 export const contact = {
-  heading: "Let's connect around meaningful healthcare research.",
-  body: "I am exploring interdisciplinary, thesis-based research opportunities for Fall 2027, particularly in clinical AI, medical imaging, healthcare analytics, and digital health technology.",
+  heading: "Let's Connect",
+  body: "I welcome conversations about applied machine learning, clinical data, medical imaging, and healthcare technology. I am especially interested in interdisciplinary projects that connect computational methods with real clinical questions and practical implementation.",
 };

@@ -1,5 +1,5 @@
-import { ArrowRight, Check, FileText } from "lucide-react";
-import { dentalComposition, projects, type Project, type ProjectStatusKind } from "@/data/portfolio";
+import { Check, FileText } from "lucide-react";
+import { dentalComposition, projects, researchSection, type Project, type ProjectStatusKind } from "@/data/portfolio";
 import Reveal from "./Reveal";
 import { publicFileExists } from "@/lib/cv";
 import { Container, Eyebrow, InlineLink, SectionHeading, Tag } from "./ui";
@@ -15,7 +15,7 @@ function StatusBadge({ kind, children }: { kind: ProjectStatusKind; children: Re
   const s = statusStyles[kind];
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[0.78rem] font-medium ${s.badge}`}
+      className={`inline-flex items-center gap-2 rounded-2xl border px-3 py-1 text-left text-[0.78rem] font-medium leading-snug ${s.badge}`}
     >
       <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
       {children}
@@ -24,9 +24,30 @@ function StatusBadge({ kind, children }: { kind: ProjectStatusKind; children: Re
 }
 
 function Meta({ project }: { project: Project }) {
-  const rows: { label: string; value: string }[] = [{ label: "My role", value: project.role }];
+  const sup = project.supervisor;
+  const rows: { label: string; value: React.ReactNode }[] = [{ label: "My role", value: project.role }];
   if (project.affiliation) rows.push({ label: "Research lab", value: project.affiliation });
-  if (project.supervisor) rows.push({ label: project.supervisor.label, value: project.supervisor.name });
+  if (sup) {
+    rows.push({
+      label: sup.label,
+      value: sup.href ? (
+        <>
+          <a
+            href={sup.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-line-strong decoration-1 underline-offset-[5px] transition-colors hover:decoration-teal"
+          >
+            {sup.name}
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          {sup.hrefNote && <span className="mt-0.5 block text-[0.8rem] text-muted">{sup.hrefNote}</span>}
+        </>
+      ) : (
+        sup.name
+      ),
+    });
+  }
   if (project.dataset) rows.push({ label: "Dataset", value: project.dataset });
   return (
     <dl className="divide-y divide-line-strong/60">
@@ -76,6 +97,16 @@ function Sections({ items }: { items?: Project["sections"] }) {
           <SubHeading>{sec.title}</SubHeading>
           <BulletList items={sec.items} />
         </div>
+      ))}
+    </div>
+  );
+}
+
+function Overview({ paragraphs, className = "" }: { paragraphs: string[]; className?: string }) {
+  return (
+    <div className={`space-y-4 leading-[1.75] ${className}`}>
+      {paragraphs.map((p) => (
+        <p key={p}>{p}</p>
       ))}
     </div>
   );
@@ -166,46 +197,6 @@ function DentalComposition() {
   );
 }
 
-/** Numbered, dashed outline: shows the planned methodology without implying anything is finished. */
-function PlannedMethod({ items }: { items: string[] }) {
-  return (
-    <div className="mt-7">
-      <SubHeading>Research interests &amp; planned methodology</SubHeading>
-      <ol className="mt-5 space-y-0">
-        {items.map((item, i) => (
-          <li key={item} className="relative flex gap-4 pb-4 last:pb-0">
-            {i < items.length - 1 && (
-              <span aria-hidden="true" className="absolute left-[13px] top-7 h-[calc(100%-1.25rem)] border-l border-dashed border-line-strong" />
-            )}
-            <span
-              aria-hidden="true"
-              className="z-10 flex h-[27px] w-[27px] shrink-0 items-center justify-center rounded-full border border-dashed border-teal bg-paper text-[0.72rem] font-medium text-teal-ink"
-            >
-              {i + 1}
-            </span>
-            <span className="pt-0.5 text-[0.97rem] leading-snug text-charcoal">{item}</span>
-          </li>
-        ))}
-      </ol>
-      <p className="mt-5 text-[0.82rem] text-muted">Planned components. Work has not started and no findings are claimed.</p>
-    </div>
-  );
-}
-
-function WorkflowStrip() {
-  const steps = ["Data", "Preprocessing", "Models", "Evaluation", "Prototype"];
-  return (
-    <ol aria-label="Project workflow" className="mt-7 flex flex-wrap items-center gap-x-2 gap-y-2">
-      {steps.map((s, i) => (
-        <li key={s} className="flex items-center gap-2">
-          <span className="rounded-md border border-line-strong bg-paper px-2.5 py-1 text-[0.8rem] text-navy">{s}</span>
-          {i < steps.length - 1 && <ArrowRight size={14} aria-hidden="true" className="text-teal" />}
-        </li>
-      ))}
-    </ol>
-  );
-}
-
 function Disclaimer({ text }: { text?: string }) {
   if (!text) return null;
   return (
@@ -233,12 +224,6 @@ function FeaturedProject({ project }: { project: Project }) {
         <div className="mt-8">
           <Meta project={project} />
         </div>
-        {project.contributions && (
-          <div className="mt-8 border-t border-line-strong/60 pt-6">
-            <SubHeading>My contributions</SubHeading>
-            <BulletList items={project.contributions} />
-          </div>
-        )}
       </div>
 
       <div className="p-7 sm:p-10 lg:col-span-8 lg:p-12">
@@ -248,14 +233,16 @@ function FeaturedProject({ project }: { project: Project }) {
         >
           {project.title}
         </h3>
-        <p className="mt-5 max-w-[40rem] text-[1.03rem] leading-[1.75]">{project.overview}</p>
+        <Overview paragraphs={project.overview} className="mt-5 max-w-[40rem] text-[1.03rem]" />
 
         <DentalComposition />
 
-        <div className="mt-9">
-          <SubHeading>{project.focusLabel}</SubHeading>
-          <BulletList items={project.focus} columns />
-        </div>
+        {project.contributions && (
+          <div className="mt-9">
+            <SubHeading>My contributions</SubHeading>
+            <BulletList items={project.contributions} />
+          </div>
+        )}
 
         <Sections items={project.sections} />
 
@@ -270,7 +257,6 @@ function FeaturedProject({ project }: { project: Project }) {
 
 /** Projects 02 and 03: compact layouts, each with its own honest visual. */
 function CompactProject({ project, tint }: { project: Project; tint?: boolean }) {
-  const isPlanned = project.id === "ovarian-biomarkers";
   return (
     <article
       aria-labelledby={`${project.id}-title`}
@@ -292,23 +278,11 @@ function CompactProject({ project, tint }: { project: Project; tint?: boolean })
       >
         {project.title}
       </h3>
-      <p className="mt-4 text-[1rem] leading-[1.75]">{project.overview}</p>
+      <Overview paragraphs={project.overview} className="mt-4 text-[1rem]" />
 
       <div className="mt-7 border-y border-line-strong/60 py-5">
         <Meta project={project} />
       </div>
-
-      {isPlanned ? (
-        <PlannedMethod items={project.focus} />
-      ) : (
-        <>
-          <WorkflowStrip />
-          <div className="mt-7">
-            <SubHeading>{project.focusLabel}</SubHeading>
-            <BulletList items={project.focus} />
-          </div>
-        </>
-      )}
 
       <Sections items={project.sections} />
 
@@ -331,15 +305,12 @@ export default function Research() {
       <Container>
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <Reveal className="lg:col-span-7">
-            <SectionHeading id="research-heading" eyebrow="Featured research">
-              Research and projects, labelled with where they actually stand.
+            <SectionHeading id="research-heading" eyebrow="Research">
+              {researchSection.heading}
             </SectionHeading>
           </Reveal>
           <Reveal delay={100} className="lg:col-span-5">
-            <p className="text-[1.02rem] leading-[1.75] text-muted">
-              One collaborative manuscript in preparation, one accepted thesis proposal, and one hands-on
-              machine learning project with a proposal under review. Results will be added here as they become available.
-            </p>
+            <p className="text-[1.02rem] leading-[1.75] text-muted">{researchSection.intro}</p>
           </Reveal>
         </div>
 
@@ -347,11 +318,11 @@ export default function Research() {
           <Reveal>
             <FeaturedProject project={dental} />
           </Reveal>
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
-            <Reveal className="h-full">
+          <div className="grid gap-6 lg:grid-cols-2 lg:items-start lg:gap-8">
+            <Reveal>
               <CompactProject project={ovarian} />
             </Reveal>
-            <Reveal delay={100} className="h-full">
+            <Reveal delay={100}>
               <CompactProject project={breast} tint />
             </Reveal>
           </div>

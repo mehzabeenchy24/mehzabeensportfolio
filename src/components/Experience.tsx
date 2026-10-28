@@ -11,7 +11,11 @@ export default function Experience() {
             <SectionHeading id="experience-heading" eyebrow="Professional experience">
               {experience.heading}
             </SectionHeading>
-            <p className="mt-7 max-w-[30rem] text-[1.03rem] leading-[1.75]">{experience.intro}</p>
+            <div className="mt-7 max-w-[30rem] space-y-4 text-[1.03rem] leading-[1.75]">
+              {experience.intro.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
           </Reveal>
 
           <ol className="lg:col-span-7">
@@ -21,9 +25,9 @@ export default function Experience() {
                   <h3 className="font-serif text-[1.9rem] leading-tight text-navy">{r.company}</h3>
                   <p className="text-[0.92rem] font-medium text-teal-ink">{r.role}</p>
                 </div>
-                <p className="mt-1 text-[0.85rem] text-muted">{r.period}</p>
                 <p className="mt-4 max-w-[36rem] text-[1rem] leading-[1.75]">{r.summary}</p>
-                <ul className="mt-5 flex flex-wrap gap-2" aria-label={`Skills from ${r.company}`}>
+                <p className="mt-5 text-[0.7rem] font-medium uppercase tracking-[0.16em] text-teal-ink">Relevant work</p>
+                <ul className="mt-2.5 flex flex-wrap gap-2" aria-label={`Relevant work at ${r.company}`}>
                   {r.themes.map((t) => (
                     <li key={t} className="rounded-full border border-navy/20 bg-ivory/70 px-3 py-1 text-[0.8rem] text-charcoal">
                       {t}

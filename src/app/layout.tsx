@@ -33,14 +33,13 @@ export const metadata: Metadata = {
     "data science",
     "interpretable machine learning",
     "digital health",
-    "MSc research Fall 2027",
   ],
   openGraph: {
     type: "website",
     title: site.title,
     description: site.description,
     siteName: site.name,
-    locale: "en_CA",
+    locale: "en",
   },
   twitter: {
     card: "summary",

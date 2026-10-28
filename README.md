@@ -29,7 +29,7 @@ Project cards are driven by the `projects` array. To add real findings later, ad
 2. Save it as `public/cv/Mehzabeen_Azad_Chowdhury_CV.pdf` (or use another name and update `links.cv` in `src/data/portfolio.ts`).
 3. Redeploy.
 
-Until that file exists, every "Download CV" button shows a clearly disabled state. It switches on automatically at build time once the PDF is present.
+The Download CV buttons appear automatically at build time once the PDF is present.
 
 ## Add a profile photo or project proposals
 

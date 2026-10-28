@@ -24,13 +24,16 @@ export default function Hero({ cvHref }: { cvHref: string | null }) {
             </Reveal>
 
             <Reveal delay={160}>
-              <p className="mt-9 max-w-[38rem] text-[1.12rem] leading-[1.75] text-charcoal">{hero.intro}</p>
+              <div className="mt-9 max-w-[38rem] space-y-5 text-[1.08rem] leading-[1.75] text-charcoal">
+                {hero.intro.map((para) => (
+                  <p key={para}>{para}</p>
+                ))}
+              </div>
             </Reveal>
 
             <Reveal delay={220}>
-              <p className="mt-6 inline-flex items-center gap-3 rounded-full bg-sage px-4 py-2 text-[0.9rem] text-navy">
-                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-teal" />
-                {hero.availability}
+              <p className="mt-7 border-t border-line-strong/70 pt-4 text-[0.86rem] tracking-[0.02em] text-muted">
+                {hero.descriptor}
               </p>
             </Reveal>
 
