@@ -1,4 +1,4 @@
-import { GitBranch, Link2, Mail } from "lucide-react";
+import { Briefcase, GitBranch, Link2, Mail } from "lucide-react";
 import { contact, links, site } from "@/data/portfolio";
 import Reveal from "./Reveal";
 import { Button, Container, CvButton, Eyebrow, InlineLink } from "./ui";
@@ -42,14 +42,26 @@ export default function Contact({ cvHref }: { cvHref: string | null }) {
                   </InlineLink>
                 </dd>
               </div>
-              <div className="py-5">
-                <dt className="text-[0.7rem] font-medium uppercase tracking-[0.16em] text-teal-ink">GitHub</dt>
-                <dd className="mt-1.5 text-[1.05rem]">
-                  <InlineLink href={links.github} icon={<GitBranch size={16} aria-hidden="true" />}>
-                    {links.github ? links.github.replace(/^https?:\/\/(www\.)?/, "") : "GitHub profile"}
-                  </InlineLink>
-                </dd>
-              </div>
+              {links.professional && (
+                <div className="py-5">
+                  <dt className="text-[0.7rem] font-medium uppercase tracking-[0.16em] text-teal-ink">Professional portfolio</dt>
+                  <dd className="mt-1.5 text-[1.05rem]">
+                    <InlineLink href={links.professional} icon={<Briefcase size={16} aria-hidden="true" />}>
+                      {links.professional.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
+                    </InlineLink>
+                  </dd>
+                </div>
+              )}
+              {links.github && (
+                <div className="py-5">
+                  <dt className="text-[0.7rem] font-medium uppercase tracking-[0.16em] text-teal-ink">GitHub</dt>
+                  <dd className="mt-1.5 text-[1.05rem]">
+                    <InlineLink href={links.github} icon={<GitBranch size={16} aria-hidden="true" />}>
+                      {links.github.replace(/^https?:\/\/(www\.)?/, "")}
+                    </InlineLink>
+                  </dd>
+                </div>
+              )}
               <div className="py-5">
                 <dt className="text-[0.7rem] font-medium uppercase tracking-[0.16em] text-teal-ink">Location</dt>
                 <dd className="mt-1.5 text-[1.05rem] text-charcoal">{site.location}</dd>

@@ -59,9 +59,10 @@ type ButtonProps = {
   variant?: "solid" | "outline";
   className?: string;
   external?: boolean;
+  download?: boolean;
 };
 
-export function Button({ href, children, variant = "solid", className = "", external }: ButtonProps) {
+export function Button({ href, children, variant = "solid", className = "", external, download }: ButtonProps) {
   const style =
     variant === "solid"
       ? "bg-navy text-ivory hover:bg-teal-ink"
@@ -71,13 +72,14 @@ export function Button({ href, children, variant = "solid", className = "", exte
       href={href}
       className={`${buttonBase} ${style} ${className}`}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      {...(download ? { download: true } : {})}
     >
       {children}
     </a>
   );
 }
 
-/** Download CV action. Renders a clearly disabled state until the PDF exists in /public/cv. */
+/** Download CV action. Hidden until the PDF exists in /public/cv. */
 export function CvButton({
   href,
   variant = "solid",
@@ -89,29 +91,17 @@ export function CvButton({
   label?: string;
   className?: string;
 }) {
-  if (!href) {
-    return (
-      <span
-        role="link"
-        aria-disabled="true"
-        title="CV will be available soon"
-        className={`${buttonBase} cursor-not-allowed border border-line-strong text-muted ${className}`}
-      >
-        <Download size={16} aria-hidden="true" />
-        {label}
-        <span className="sr-only"> (not yet available)</span>
-      </span>
-    );
-  }
+  // No PDF uploaded yet: hide the button rather than show one that does nothing.
+  if (!href) return null;
   return (
-    <Button href={href} variant={variant} className={className}>
+    <Button href={href} variant={variant} className={className} download>
       <Download size={16} aria-hidden="true" />
       {label}
     </Button>
   );
 }
 
-/** Text link with an arrow. Disabled and labelled "coming soon" when href is empty. */
+/** Text link with an arrow. Hidden when href is empty. */
 export function InlineLink({
   href,
   children,
@@ -123,19 +113,7 @@ export function InlineLink({
   icon?: React.ReactNode;
   className?: string;
 }) {
-  if (!href) {
-    return (
-      <span
-        aria-disabled="true"
-        className={`inline-flex items-center gap-2 text-muted ${className}`}
-        title="Link coming soon"
-      >
-        {icon}
-        {children}
-        <span className="text-[0.75rem] uppercase tracking-wider">· coming soon</span>
-      </span>
-    );
-  }
+  if (!href) return null;
   const isMail = href.startsWith("mailto:");
   return (
     <a

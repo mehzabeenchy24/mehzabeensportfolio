@@ -22,6 +22,8 @@ export const site = {
 
 export const links = {
   linkedin: "https://www.linkedin.com/in/mehzabeen-chy",
+  /** Professional (product management) portfolio. Verify this address opens before sharing. */
+  professional: "https://mehzabeenchy24.github.io/Portfolio-/",
   /** TODO: paste your GitHub profile URL, e.g. "https://github.com/your-username" */
   github: "",
   /**
@@ -29,6 +31,15 @@ export const links = {
    * The Download CV buttons switch on automatically once the file exists.
    */
   cv: "/cv/Mehzabeen_Azad_Chowdhury_CV.pdf",
+};
+
+/**
+ * Profile photo. Save your image as public/images/profile.jpg (.jpeg, .png and .webp also work).
+ * It appears in the About section automatically; nothing shows until the file exists.
+ */
+export const photo = {
+  basePath: "/images/profile",
+  alt: "Portrait of Mehzabeen Azad Chowdhury",
 };
 
 export const nav = [
@@ -40,50 +51,60 @@ export const nav = [
 ];
 
 export const hero = {
-  label: "Computer Science · Data Science · Healthcare AI",
+  label: "Health Informatics · Clinical Informatics · Data Science",
   headline: {
     before: "Exploring healthcare through",
     emphasis: "data, intelligence, and technology.",
   },
   intro:
-    "I'm Mehzabeen, a Computer Science graduate and MSc Data Science student exploring applied AI, medical imaging, and clinical data analysis. With a background in software product management, I am interested in building and evaluating technologies that address meaningful healthcare challenges.",
+    "I'm Mehzabeen, a Computer Science graduate and MSc Data Science student drawn to health and clinical informatics. I like working where doctors, labs, and software meet: understanding what clinical teams actually need and helping turn it into data, tools, and workflows that hold up in practice. I'm not an expert yet, and I learn fastest by building.",
   availability: "Exploring thesis-based research opportunities for Fall 2027.",
   glance: [
     { label: "Currently", value: "MSc Data Science, SUST" },
-    { label: "Background", value: "BSc in Computer Science & Engineering; ~3 years in SaaS product work" },
-    { label: "Working on", value: "Medical imaging datasets, clinical prediction, interpretable ML" },
+    { label: "Background", value: "BSc in Computer Science & Engineering; almost 3 years in SaaS product work" },
+    { label: "Working on", value: "Dental imaging dataset, ovarian cancer biomarkers, breast cancer classification" },
+    { label: "Strength", value: "Bridging clinical, lab, and technical teams" },
     { label: "Based in", value: site.location },
   ],
 };
 
 export const about = {
-  heading: "From software products to applied healthcare research.",
+  heading: "Bridging the lab, the clinic, and the software.",
   paragraphs: [
-    "I studied Computer Science and Engineering as an undergraduate, then spent roughly three years working on SaaS products across product management, coordination, and software quality assurance. Working on real products taught me how requirements are shaped, how quality is protected, and how much usability and collaboration matter to whether software actually gets used.",
-    "I am now pursuing an MSc in Data Science, and my focus has moved toward applied research in healthcare. I contribute to a medical imaging dataset project in dentistry, I am developing thesis work on machine learning for ovarian cancer diagnosis using blood-based biomarkers, and I am building a hands-on breast cancer classification project in Python to strengthen my modelling and evaluation skills.",
-    "I want to do hands-on technical work: programming, modelling, careful evaluation, and prototyping. My interest is less in inventing new algorithms and more in applying established methods rigorously to clinical problems, in teams that include clinicians. I am still building my depth in machine learning, and I see a research degree as the right place to do that properly.",
+    "What pulls me toward health and clinical informatics is the space between people. A lot goes wrong at the handoffs: what a doctor needs is not always what gets specified, and what a lab records is not always what software can use. I enjoy working in that gap, talking with clinicians and lab teams, understanding how they work, and translating between them and the people building the technology.",
+    "That instinct comes from my work before research. After a BSc in Computer Science and Engineering, I spent almost three years on SaaS products: at Agency Handy, doing a lot of logic building to define how features should behave; at Technext, combining junior product work with software quality assurance; and at Appifylab, in product coordination while leading technical support teams. Those years gave me practice in clear requirements, careful testing, and communicating across disciplines.",
+    "Now, in my MSc in Data Science, I am applying that in health research: reviewing and checking a dental imaging dataset alongside clinical experts, planning thesis work on ovarian cancer biomarkers, and building a breast cancer classification project. I work in Python and Google Colab, but I am not looking to be a heavy machine learning specialist. I would rather use established methods carefully and make them useful to clinical teams. I am not an expert in any of this yet. I am willing to learn, and I am keen to put my hands on real clinical data.",
   ],
   positioning:
-    "An emerging interdisciplinary researcher combining computer science, applied machine learning, and product development experience to explore practical, clinically meaningful healthcare technologies.",
+    "A computer scientist and former product manager building toward health and clinical informatics: collaborative, curious, and learning by doing.",
   education: [
     {
       degree: "MSc in Data Science",
       institution: "Shahjalal University of Science and Technology (SUST)",
-      detail: "Ongoing",
+      detail: "2026 – present",
     },
     {
       degree: "BSc in Computer Science and Engineering",
       institution: "Leading University, Bangladesh",
-      detail: "CGPA 3.44 / 4.00",
+      detail: "2020 – 2024 · CGPA 3.44 / 4.00",
     },
   ],
 };
 
-export type ProjectStatusKind = "manuscript" | "thesis" | "development";
+export type ProjectStatusKind = "manuscript" | "review" | "thesis" | "development";
 
 export type ProjectLink = {
   label: string;
-  /** Leave "" until the link exists; it will render as a disabled "coming soon" link. */
+  /** Leave "" until the link exists; links without a URL are hidden. */
+  href: string;
+};
+
+export type ProjectDocument = {
+  label: string;
+  /**
+   * Path inside /public, e.g. "/docs/dental-dataset-proposal.pdf".
+   * The button appears automatically once that file exists.
+   */
   href: string;
 };
 
@@ -107,6 +128,10 @@ export type Project = {
   /** Add real findings here when you have them. Shown under "Results". */
   results?: string[];
   links: ProjectLink[];
+  /** Extra detail blocks (for example research questions or study design) drawn from the project proposal. */
+  sections?: { title: string; items: string[] }[];
+  /** Proposal and other documents. Each shows only when its PDF is present in /public. */
+  documents?: ProjectDocument[];
   disclaimer?: string;
 };
 
@@ -132,12 +157,24 @@ export const projects: Project[] = [
       "Collaboration with clinical experts",
       "Preparation for downstream AI-assisted dental research",
     ],
-    tools: ["Medical Imaging", "Dental AI", "CVAT", "Dataset Curation", "Annotation QA", "Research Collaboration"],
+    tools: ["Medical Imaging", "Dental AI", "CVAT", "Google Colab", "Dataset Curation", "Annotation QA", "Research Collaboration"],
     contributions: [
       "Dataset review",
       "Image–annotation consistency checks",
+      "Technical checks in Google Colab",
       "Research collaboration",
       "Manuscript-related work",
+    ],
+    sections: [
+      {
+        title: "Dataset design",
+        items: [
+          "Images from clinical dental practices, with identifying information removed before inclusion",
+          "21 classes in three groups: anatomical foundations, pathological indicators, and clinical status and developmental markers",
+          "Bounding-box annotations made in CVAT and verified by a board-certified dentist",
+          "Structured for object-detection and segmentation workflows such as YOLO and U-Net",
+        ],
+      },
     ],
     notes: [
       "Composition figures are as described in the current manuscript draft.",
@@ -150,36 +187,38 @@ export const projects: Project[] = [
     index: "02",
     category: "Clinical prediction · Thesis research",
     title: "Ovarian Cancer Diagnosis Using Blood-Based Biomarkers",
-    status: "MSc thesis · Ongoing",
+    status: "Thesis proposal accepted · Not yet started",
     statusKind: "thesis",
     overview:
-      "An ongoing research project exploring machine learning approaches to ovarian cancer diagnosis using blood-based biomarkers, with an emphasis on clinically meaningful model evaluation and interpretable predictions.",
+      "A planned MSc thesis on distinguishing benign from malignant ovarian tumours using blood-based biomarkers and established machine learning methods, with an emphasis on clinically meaningful evaluation and interpretable predictions. The proposal has been accepted by my supervisor as my final MSc thesis; the research itself has not started.",
     role: "MSc thesis researcher",
     supervisor: { label: "Supervisor", name: "Dr. Nahid Sultana" },
-    focusLabel: "Research interests & planned methodology",
+    focusLabel: "Research direction & planned methodology",
     focus: [
-      "CA125 and HE4 biomarkers",
-      "Clinical and laboratory measurements",
-      "Supervised machine learning",
-      "Model comparison",
+      "Literature review",
+      "Assessment of dataset suitability",
+      "CA125, HE4, and routine laboratory measures",
+      "Data preprocessing",
+      "Comparison of established classification methods",
       "Model calibration",
-      "Clinical utility assessment",
+      "Clinical utility and interpretability",
       "Reproducible evaluation",
     ],
     tools: ["Clinical AI", "Biomarkers", "Predictive Modeling", "Python", "Machine Learning", "Clinical Evaluation"],
-    notes: ["Work in progress. No results are reported yet."],
+    notes: ["The proposal is accepted; work has not begun. No results are claimed. Scope depends on dataset suitability."],
     links: [],
+    documents: [{ label: "Thesis proposal (PDF)", href: "/docs/ovarian-biomarkers-proposal.pdf" }],
   },
   {
     id: "breast-cancer-ml",
     index: "03",
     category: "Applied machine learning · Prototype",
     title: "Interpretable Breast Cancer Classification",
-    status: "Project in development",
-    statusKind: "development",
+    status: "Proposal under review · ICPS 2026",
+    statusKind: "review",
     overview:
-      "A hands-on machine learning project exploring breast cancer classification using numerical features derived from digitized fine-needle aspirate images, with a focus on model evaluation, interpretable predictions, and a lightweight interactive demonstration.",
-    role: "Independent project",
+      "A hands-on machine learning project exploring breast cancer classification using numerical features derived from digitized fine-needle aspirate images, with a focus on model evaluation, interpretable predictions, and a lightweight interactive demonstration. A research proposal on this topic has been submitted to ICPS 2026 and is under review.",
+    role: "Three-person team project; currently doing the hands-on work",
     dataset: "UCI Wisconsin Diagnostic Breast Cancer Dataset",
     focusLabel: "Technical scope",
     focus: [
@@ -190,7 +229,30 @@ export const projects: Project[] = [
       "A small web-based prototype",
     ],
     tools: ["Python", "pandas", "NumPy", "scikit-learn", "Interpretable ML", "Classification", "Healthcare AI", "Web Prototype"],
+    sections: [
+      {
+        title: "Research questions",
+        items: [
+          "How far can a decision tree's complexity be constrained before sensitivity for malignant cases drops, compared with a Random Forest reference?",
+          "Which nuclear features drive the root and early splits of constrained trees, and how do they compare with Random Forest feature importances?",
+          "Can a shallow tree (depth of 4 or less) stay within a 3% tolerance of Random Forest performance?",
+        ],
+      },
+      {
+        title: "Proposed study design",
+        items: [
+          "WDBC dataset: 569 samples (357 benign, 212 malignant) with 30 nuclear features",
+          "Stratified 80/20 split with 114 samples held out, and 10-fold stratified cross-validation during development",
+          "Decision trees of varying depth, split and leaf limits, with complexity tracked by node count, leaf count, depth, and average path length",
+          "A tuned Random Forest (100 to 500 trees) as the reference model",
+          "Emphasis on sensitivity and false-negative rate, alongside accuracy, specificity, F1, and ROC-AUC, with McNemar's test and paired t-tests",
+          "An interactive dashboard to trace a prediction through the tree and compare models",
+        ],
+      },
+    ],
     notes: [
+      "Study design as set out in the project proposal. These are planned components, not completed results.",
+      "The proposal is under review for ICPS 2026. It has not been accepted or published.",
       "The aim is a reproducible applied ML workflow, not a clinical diagnostic service.",
     ],
     disclaimer: "Educational research prototype — not intended for clinical use.",
@@ -198,6 +260,7 @@ export const projects: Project[] = [
       // TODO: paste the repository URL here when it is public.
       { label: "GitHub repository", href: "" },
     ],
+    documents: [{ label: "Research proposal (PDF)", href: "/docs/breast-cancer-proposal.pdf" }],
   },
 ];
 
@@ -214,24 +277,27 @@ export const experience = {
   roles: [
     {
       company: "Agency Handy",
+      period: "Mar 2025 – Apr 2026",
       role: "Product Manager",
       summary:
-        "Product management on SaaS work, centred on requirements, documentation, and clear priorities and workflows for the engineering team.",
-      themes: ["Product requirements and documentation", "Workflows and prioritization", "Communication with engineering teams"],
+        "Product management on SaaS work, with a lot of hands-on logic building: working out the rules and flows behind how features should behave, and turning them into clear requirements and priorities for the engineering team.",
+      themes: ["Logic building", "Product requirements and documentation", "Workflows and prioritization", "Communication with engineering teams"],
     },
     {
       company: "Technext",
-      role: "Product Management & Software Quality Assurance",
+      period: "May 2024 – Jan 2025",
+      role: "Junior Product Management & Software QA",
       summary:
         "A combined product and software quality assurance role: testing software against its requirements and feeding what was found back into iteration.",
       themes: ["Software quality assurance", "Testing and iterative improvements", "Cross-functional collaboration"],
     },
     {
       company: "Appifylab",
-      role: "Product Coordination",
+      period: "Nov 2023 – Apr 2024",
+      role: "Product Coordination, QA & Technical Support",
       summary:
-        "Product coordination across teams, with attention to documentation and requirements as features moved through development.",
-      themes: ["Cross-functional collaboration", "User-centered problem-solving", "Product requirements and documentation"],
+        "Product coordination across teams, with attention to documentation and requirements as features moved through development, alongside leading technical support teams.",
+      themes: ["Leading technical support teams", "Cross-functional collaboration", "User-centered problem-solving", "Product requirements and documentation"],
     },
   ],
 };

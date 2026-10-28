@@ -1,10 +1,12 @@
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, FileText } from "lucide-react";
 import { dentalComposition, projects, type Project, type ProjectStatusKind } from "@/data/portfolio";
 import Reveal from "./Reveal";
+import { publicFileExists } from "@/lib/cv";
 import { Container, Eyebrow, InlineLink, SectionHeading, Tag } from "./ui";
 
 const statusStyles: Record<ProjectStatusKind, { badge: string; dot: string }> = {
   manuscript: { badge: "border-teal/40 bg-sage text-navy", dot: "bg-teal" },
+  review: { badge: "border-teal/50 bg-sage text-navy", dot: "bg-teal-ink" },
   thesis: { badge: "border-navy/30 bg-navy text-ivory", dot: "bg-ivory" },
   development: { badge: "border-line-strong bg-paper text-navy", dot: "bg-teal-ink" },
 };
@@ -65,6 +67,20 @@ function Tags({ items }: { items: string[] }) {
   );
 }
 
+function Sections({ items }: { items?: Project["sections"] }) {
+  if (!items?.length) return null;
+  return (
+    <div className="mt-8 space-y-7">
+      {items.map((sec) => (
+        <div key={sec.title}>
+          <SubHeading>{sec.title}</SubHeading>
+          <BulletList items={sec.items} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function Notes({ items }: { items?: string[] }) {
   if (!items?.length) return null;
   return (
@@ -89,10 +105,27 @@ function ResultsBlock({ results }: { results?: string[] }) {
 }
 
 function Links({ project }: { project: Project }) {
-  if (!project.links.length) return null;
+  const links = project.links.filter((l) => l.href);
+  // A document button appears only when its PDF is actually present in /public.
+  const docs = (project.documents ?? []).filter((d) => publicFileExists(d.href));
+  if (!links.length && !docs.length) return null;
   return (
-    <ul className="mt-7 flex flex-wrap gap-x-7 gap-y-3 text-[0.93rem]">
-      {project.links.map((l) => (
+    <ul className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-3 text-[0.93rem]">
+      {docs.map((d) => (
+        <li key={d.href}>
+          <a
+            href={d.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-navy/25 px-4 py-2 text-[0.88rem] font-medium text-navy transition-colors hover:border-navy hover:bg-navy/5"
+          >
+            <FileText size={15} aria-hidden="true" />
+            {d.label}
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </li>
+      ))}
+      {links.map((l) => (
         <li key={l.label}>
           <InlineLink href={l.href}>{l.label}</InlineLink>
         </li>
@@ -154,7 +187,7 @@ function PlannedMethod({ items }: { items: string[] }) {
           </li>
         ))}
       </ol>
-      <p className="mt-5 text-[0.82rem] text-muted">Ongoing and planned components, not completed findings.</p>
+      <p className="mt-5 text-[0.82rem] text-muted">Planned components. Work has not started and no findings are claimed.</p>
     </div>
   );
 }
@@ -224,6 +257,8 @@ function FeaturedProject({ project }: { project: Project }) {
           <BulletList items={project.focus} columns />
         </div>
 
+        <Sections items={project.sections} />
+
         <Tags items={project.tools} />
         <ResultsBlock results={project.results} />
         <Notes items={project.notes} />
@@ -275,6 +310,8 @@ function CompactProject({ project, tint }: { project: Project; tint?: boolean })
         </>
       )}
 
+      <Sections items={project.sections} />
+
       <Disclaimer text={project.disclaimer} />
       <ResultsBlock results={project.results} />
 
@@ -300,8 +337,8 @@ export default function Research() {
           </Reveal>
           <Reveal delay={100} className="lg:col-span-5">
             <p className="text-[1.02rem] leading-[1.75] text-muted">
-              One collaborative manuscript in preparation, one thesis project under way, and one hands-on
-              machine learning project in development. Results will be added here as they become available.
+              One collaborative manuscript in preparation, one accepted thesis proposal, and one hands-on
+              machine learning project with a proposal under review. Results will be added here as they become available.
             </p>
           </Reveal>
         </div>

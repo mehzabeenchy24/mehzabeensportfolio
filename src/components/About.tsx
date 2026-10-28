@@ -1,8 +1,11 @@
-import { about } from "@/data/portfolio";
+import Image from "next/image";
+import { about, photo } from "@/data/portfolio";
+import { getPhotoSrc } from "@/lib/cv";
 import Reveal from "./Reveal";
 import { Container, Eyebrow, SectionHeading } from "./ui";
 
 export default function About() {
+  const photoSrc = getPhotoSrc();
   return (
     <section id="about" aria-labelledby="about-heading" className="border-b border-line py-24 sm:py-32">
       <Container>
@@ -13,6 +16,26 @@ export default function About() {
                 {about.heading}
               </SectionHeading>
             </Reveal>
+
+            {photoSrc && (
+              <Reveal delay={60} className="mt-10">
+                <figure className="relative max-w-[22rem]">
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-3 -right-3 h-full w-full rounded-2xl border border-teal/50"
+                  />
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-sage">
+                    <Image
+                      src={photoSrc}
+                      alt={photo.alt}
+                      fill
+                      sizes="(min-width: 1024px) 22rem, 80vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </figure>
+              </Reveal>
+            )}
 
             <Reveal delay={100} className="mt-12">
               <Eyebrow>Education</Eyebrow>

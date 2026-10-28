@@ -64,7 +64,7 @@ const personJsonLd = {
   address: { "@type": "PostalAddress", addressLocality: "Sylhet", addressCountry: "BD" },
   jobTitle: "MSc Data Science student",
   description: site.description,
-  sameAs: [links.linkedin, links.github].filter(Boolean),
+  sameAs: [links.linkedin, links.professional, links.github].filter(Boolean),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

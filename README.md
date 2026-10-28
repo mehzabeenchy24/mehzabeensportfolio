@@ -31,6 +31,11 @@ Project cards are driven by the `projects` array. To add real findings later, ad
 
 Until that file exists, every "Download CV" button shows a clearly disabled state. It switches on automatically at build time once the PDF is present.
 
+## Add a profile photo or project proposals
+
+- **Photo:** save it as `public/images/profile.jpg`. It appears in the About section.
+- **Proposals:** save each PDF in `public/docs/` using the names in `src/data/portfolio.ts` (`breast-cancer-proposal.pdf`, `ovarian-biomarkers-proposal.pdf`). A "Research proposal" button appears on that project's card once the file exists. Only publish documents you and any co-authors are happy to make public.
+
 ## Add your GitHub URL and project repositories
 
 In `src/data/portfolio.ts`:

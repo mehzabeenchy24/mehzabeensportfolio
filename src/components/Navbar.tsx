@@ -121,9 +121,11 @@ export default function Navbar({ cvHref }: { cvHref: string | null }) {
                 </a>
               </li>
             ))}
-            <li className="py-4">
-              <CvButton href={cvHref} className="w-full" />
-            </li>
+            {cvHref && (
+              <li className="py-4">
+                <CvButton href={cvHref} className="w-full" />
+              </li>
+            )}
           </ul>
         </div>
       )}

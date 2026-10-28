@@ -1,4 +1,4 @@
-import { ArrowDown, GitBranch, Link2, Mail } from "lucide-react";
+import { ArrowDown, Briefcase, GitBranch, Link2, Mail } from "lucide-react";
 import { hero, links, site } from "@/data/portfolio";
 import Reveal from "./Reveal";
 import { Button, Container, CvButton, Eyebrow } from "./ui";
@@ -70,6 +70,20 @@ export default function Hero({ cvHref }: { cvHref: string | null }) {
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 </li>
+                {links.professional && (
+                  <li>
+                    <a
+                      href={links.professional}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-muted transition-colors hover:text-navy"
+                    >
+                      <Briefcase size={16} aria-hidden="true" />
+                      Professional portfolio
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </li>
+                )}
                 <li>
                   <a
                     href={`mailto:${site.email}`}

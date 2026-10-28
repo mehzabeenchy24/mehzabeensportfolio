@@ -21,6 +21,7 @@ export default function Experience() {
                   <h3 className="font-serif text-[1.9rem] leading-tight text-navy">{r.company}</h3>
                   <p className="text-[0.92rem] font-medium text-teal-ink">{r.role}</p>
                 </div>
+                <p className="mt-1 text-[0.85rem] text-muted">{r.period}</p>
                 <p className="mt-4 max-w-[36rem] text-[1rem] leading-[1.75]">{r.summary}</p>
                 <ul className="mt-5 flex flex-wrap gap-2" aria-label={`Skills from ${r.company}`}>
                   {r.themes.map((t) => (
